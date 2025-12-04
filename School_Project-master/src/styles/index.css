@@ -1,0 +1,37 @@
+[{
+	"resource": "/c:/Users/KUPARAME/Downloads/School_Project-master/School_Project-master/src/styles/index.css",
+	"owner": "_generated_diagnostic_collection_name_#0",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 947,
+	"startColumn": 468,
+	"endLineNumber": 947,
+	"endColumn": 475,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/KUPARAME/Downloads/School_Project-master/School_Project-master/src/styles/index.css",
+	"owner": "_generated_diagnostic_collection_name_#0",
+	"code": "css-ruleorselectorexpected",
+	"severity": 8,
+	"message": "at-rule or selector expected",
+	"source": "css",
+	"startLineNumber": 1518,
+	"startColumn": 1,
+	"endLineNumber": 1518,
+	"endColumn": 2,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/KUPARAME/Downloads/School_Project-master/School_Project-master/src/styles/index.css",
+	"owner": "_generated_diagnostic_collection_name_#0",
+	"code": "propertyIgnoredDueToDisplay",
+	"severity": 4,
+	"message": "Property is ignored due to the display. With 'display: block', vertical-align should not be used.",
+	"source": "css",
+	"startLineNumber": 206,
+	"startColumn": 5,
+	"endLineNumber": 206,
+	"endColumn": 27,
+	"origin": "extHost1"
+}]
