@@ -17,9 +17,9 @@ export function StudentProvider({ children }) {
   const addGroupToContext = useAddGroup();
 
   const [students, setStudents] = useState(() => {
+    // initial local fallback; real source will be loaded in useEffect
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
-    return studentsData; // Load fresh from students.json
+    return saved ? JSON.parse(saved) : studentsData;
   });
 
   const [marks, setMarks] = useState(() => {
@@ -37,21 +37,46 @@ export function StudentProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
 
+  // load authoritative students from serverless blob on mount
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const r = await fetch('/api/blob/get-students');
+        if (!mounted) return;
+        if (r.ok) {
+          const remote = await r.json();
+          if (Array.isArray(remote) && remote.length) {
+            setStudents(remote);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(remote));
+            return;
+          }
+        }
+        // fallback to existing local value (already set in state)
+      } catch (err) {
+        // ignore and keep local copy
+        console.warn('Failed to load remote students', err);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
+
+  // persist changes to localStorage and remote blob
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+    (async () => {
+      try {
+        // send students to serverless save endpoint (no blocking)
+        await fetch('/api/blob/save-students', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(students)
+        });
+      } catch (e) {
+        console.warn('Failed to persist students to remote blob', e);
+      }
+    })();
   }, [students]);
-
-  useEffect(() => {
-    localStorage.setItem('sri_sudha_marks_v1', JSON.stringify(marks));
-  }, [marks]);
-
-  useEffect(() => {
-    localStorage.setItem('sri_sudha_attendance_v1', JSON.stringify(attendance));
-  }, [attendance]);
-
-  useEffect(() => {
-    localStorage.setItem('sri_sudha_outpasses_v1', JSON.stringify(outpasses));
-  }, [outpasses]);
 
   function generateAdmissionNo() {
     const year = new Date().getFullYear();
