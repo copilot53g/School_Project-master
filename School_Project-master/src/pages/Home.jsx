@@ -12,15 +12,8 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="container text-center">
-          <div className="school-badge animate-float" aria-hidden="true">
-            {/* compact app-mark for nav/tiles */}
+          <div>
             <svg width="56" height="56" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="app-mark">
-              <defs>
-                <linearGradient id="gv" x1="0" x2="1">
-                  <stop offset="0" stopColor="#60a5fa"/>
-                  <stop offset="1" stopColor="#7c3aed"/>
-                </linearGradient>
-              </defs>
               <rect width="100" height="100" rx="18" fill="url(#gv)" opacity="0.12"/>
               <path d="M30 70 L46 32 L62 70" stroke="url(#gv)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M58 36 L74 36" stroke="url(#gv)" strokeWidth="6" strokeLinecap="round"/>
@@ -54,11 +47,6 @@ const Home = () => {
               </span>
             </span>
           </h1>
-
-          <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            Innovating Education for Tomorrow's Leaders
-          </p>
-          <p className="label">Digital managment world</p>
         </div>
         <div className="hero-bg-glow"></div>
       </section>
